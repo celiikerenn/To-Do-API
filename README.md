@@ -106,15 +106,6 @@ curl -X DELETE http://localhost:5000/tasks/1
 
 ---
 
-## 🚧 Future Improvements
-
-- Authentication (JWT)
-- Swagger/OpenAPI documentation
-- Frontend UI (React or plain HTML)
-- Auto-deploy pipeline via GitHub Actions
-
----
-
 ## 📄 License
 
 MIT — feel free to use, modify, and share.
