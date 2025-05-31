@@ -70,7 +70,7 @@ def add_task():
     return jsonify({"message": "Task added!", "id": new_id}), 201
 
 
-@@app.route("/tasks/<int:task_id>", methods=["PUT"])
+@app.route("/tasks/<int:task_id>", methods=["PUT"])
 def update_task(task_id):
     data = request.get_json()
     title = data.get("title")
