@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 import psycopg2
 import os
@@ -33,15 +35,19 @@ def home():
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT id, title, done FROM tasks ORDER BY id;")
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
+    try:
+     conn = get_db_connection()
+     cur = conn.cursor()
+     cur.execute("SELECT id, title, done FROM tasks ORDER BY id;")
+     rows = cur.fetchall()
+     cur.close()
+     conn.close()
 
-    tasks = [{"id": row[0], "title": row[1], "done": row[2]} for row in rows]
-    return jsonify(tasks)
+     tasks = [{"id": row[0], "title": row[1], "done": row[2]} for row in rows]
+     return jsonify(tasks)
+    except Exception as e:
+        print("❌ HATA:", e)
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/tasks", methods=["POST"])
 def add_task():
@@ -62,20 +68,20 @@ def add_task():
     return jsonify({"message": "Task added!", "id": new_id}), 201
 
 
-@app.route('/tasks/<int:task_id>', methods=['PUT'])
+@@app.route("/tasks/<int:task_id>", methods=["PUT"])
 def update_task(task_id):
     data = request.get_json()
-    title = data.get('title')
-    done = data.get('done')
+    title = data.get("title")
+    done = data.get("done", False)
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("UPDATE tasks SET title = %s, done = %s WHERE id = %s", (title, done, task_id))
+    cur.execute("UPDATE tasks SET title = %s, done = %s WHERE id = %s;", (title, done, task_id))
     conn.commit()
     cur.close()
     conn.close()
+    return jsonify({"message": "Task updated!"})
 
-    return jsonify({'message': 'Task updated!'})
 
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
