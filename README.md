@@ -107,3 +107,26 @@ curl -X DELETE http://localhost:5000/tasks/1
 - Github Actions
 
 ---
+
+
+## 🖥️ Frontend
+
+The frontend of this project is located in the `frontend/` directory and is built using plain HTML, CSS, and JavaScript (Vanilla JS).
+
+### Features:
+- View task list
+- Add new tasks
+- Edit task titles
+- Delete tasks
+- Mark tasks as complete (via checkbox)
+
+### How to Run:
+
+Start a simple static file server from the `frontend/` directory:
+
+```bash
+cd frontend/
+python3 -m http.server 8000
+
+Then open your browser and navigate to: http://localhost:8000
+
