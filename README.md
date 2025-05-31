@@ -103,9 +103,6 @@ curl -X DELETE http://localhost:5000/tasks/1
 - PostgreSQL
 - Docker
 - Docker Compose
+- Github Actions
 
 ---
-
-## 📄 License
-
-MIT — feel free to use, modify, and share.
