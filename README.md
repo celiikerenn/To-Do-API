@@ -35,7 +35,7 @@ todo_api/
 ## 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/todo-api.git
+git clone https://github.com/celiikerenn/todo-api.git
 cd todo-api
 ```
 
